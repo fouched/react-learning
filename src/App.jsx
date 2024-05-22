@@ -23,7 +23,7 @@ function App(props) {
             {
                 id: 2,
                 firstName: "Jack",
-                lastName: "Smit",
+                lastName: "Smith",
                 dob: "1990-04-06"
             },
         ]
