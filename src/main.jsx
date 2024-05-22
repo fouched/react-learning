@@ -1,13 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import HelloWorld from "./HelloWorld.jsx";
+import App from "./App.jsx";
+// import AppClass from './AppClass'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
       <div className="container">
           <div className="row">
               <div className="col">
-                  <HelloWorld msg="Hello, again!"/>
+                  <App msg="State using functional component"/>
+                  {/*<AppClass msg="State using class component" />*/}
               </div>
           </div>
       </div>
