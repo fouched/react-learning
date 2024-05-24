@@ -1,10 +1,14 @@
 import './App.css'
 import {useEffect, useState} from "react";
+import Input from "./Input.jsx";
 
 function App(props) {
 
     const [isTrue, setIsTrue] = useState(true)
     const [crowd, setCrowd] = useState([])
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [dob, setDob] = useState('')
 
     const toggleTrue = () => {
         setIsTrue(!isTrue)
@@ -47,6 +51,38 @@ function App(props) {
             : <p>Is false</p>
             }
             <a href="#" className="btn btn-outline-secondary" onClick={toggleTrue}>Toggle isTrue</a>
+            <hr />
+                <form autoComplete="off">
+                    <Input
+                        title="First Name"
+                        type="text"
+                        name="firstName"
+                        autoComplete="firstNameNew"
+                        className="form-control"
+                        onChange={(e) => setFirstName(e.target.value)}
+                    ></Input>
+                    <Input
+                        title="Last Name"
+                        type="text"
+                        name="lastName"
+                        autoComplete="lastNameNew"
+                        className="form-control"
+                        onChange={(e) => setLastName(e.target.value)}
+                    ></Input>
+                    <Input
+                        title="DOB"
+                        type="date"
+                        name="dob"
+                        autoComplete="dobNew"
+                        className="form-control"
+                        onChange={(e) => setDob(e.target.value)}
+                    ></Input>
+                </form>
+                <div>
+                    First Name: {firstName}<br />
+                    Last Name: {lastName}<br />
+                    DOB: {dob}<br />
+                </div>
             <hr />
             <h3>People</h3>
             <ul className="list-group">
