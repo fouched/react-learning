@@ -34,6 +34,38 @@ function App(props) {
         setCrowd(people)
     }, []);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if ( lastName !== "" ) {
+            addPerson(firstName, lastName, dob)
+        }
+    }
+
+    const addPerson = (newFirst, newLast, newDOD) => {
+        let newPerson = {
+            id: crowd.length + 1,
+            firstName: newFirst,
+            lastName: newLast,
+            dob: newDOD,
+        }
+
+        const newList = crowd.concat(newPerson);
+        const sorted = newList.sort((a, b) => {
+            if (a.lastName < b.lastName) {
+                return -1;
+            } else if (a.lastName > b.lastName) {
+                return 1;
+            }
+            return 0;
+        });
+
+        setCrowd(sorted)
+        setFirstName("")
+        setLastName("")
+        setDob("")
+    }
+
     return(
         <>
             <hr/>
@@ -52,37 +84,38 @@ function App(props) {
             }
             <a href="#" className="btn btn-outline-secondary" onClick={toggleTrue}>Toggle isTrue</a>
             <hr />
-                <form autoComplete="off">
-                    <Input
-                        title="First Name"
-                        type="text"
-                        name="firstName"
-                        autoComplete="firstNameNew"
-                        className="form-control"
-                        onChange={(e) => setFirstName(e.target.value)}
-                    ></Input>
-                    <Input
-                        title="Last Name"
-                        type="text"
-                        name="lastName"
-                        autoComplete="lastNameNew"
-                        className="form-control"
-                        onChange={(e) => setLastName(e.target.value)}
-                    ></Input>
-                    <Input
-                        title="DOB"
-                        type="date"
-                        name="dob"
-                        autoComplete="dobNew"
-                        className="form-control"
-                        onChange={(e) => setDob(e.target.value)}
-                    ></Input>
-                </form>
-                <div>
-                    First Name: {firstName}<br />
-                    Last Name: {lastName}<br />
-                    DOB: {dob}<br />
-                </div>
+            <form autoComplete="off" onSubmit={handleSubmit}>
+                <Input
+                    title="First Name"
+                    type="text"
+                    name="firstName"
+                    autoComplete="firstNameNew"
+                    className="form-control"
+                    onChange={(e) => setFirstName(e.target.value)}
+                ></Input>
+                <Input
+                    title="Last Name"
+                    type="text"
+                    name="lastName"
+                    autoComplete="lastNameNew"
+                    className="form-control"
+                    onChange={(e) => setLastName(e.target.value)}
+                ></Input>
+                <Input
+                    title="Date of birth"
+                    type="date"
+                    name="dob"
+                    autoComplete="dobNew"
+                    className="form-control"
+                    onChange={(e) => setDob(e.target.value)}
+                ></Input>
+                <input type="submit" value="submit" className="btn btn-primary"/>
+            </form>
+            <div>
+                First Name: {firstName}<br />
+                Last Name: {lastName}<br />
+                Date of birth: {dob}<br />
+            </div>
             <hr />
             <h3>People</h3>
             <ul className="list-group">
