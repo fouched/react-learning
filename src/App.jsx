@@ -1,5 +1,5 @@
 import './App.css'
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import Input from "./Input.jsx";
 
 function App(props) {
@@ -9,6 +9,11 @@ function App(props) {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [dob, setDob] = useState('')
+
+    // refs
+    const firstNameRef = useRef(null)
+    const lastNameRef = useRef(null)
+    const dobRef = useRef(null)
 
     const toggleTrue = () => {
         setIsTrue(!isTrue)
@@ -52,9 +57,9 @@ function App(props) {
 
         const newList = crowd.concat(newPerson);
         const sorted = newList.sort((a, b) => {
-            if (a.lastName < b.lastName) {
+            if (a.lastName.toUpperCase() < b.lastName.toUpperCase()) {
                 return -1;
-            } else if (a.lastName > b.lastName) {
+            } else if (a.lastName.toUpperCase() > b.lastName.toUpperCase()) {
                 return 1;
             }
             return 0;
@@ -64,6 +69,11 @@ function App(props) {
         setFirstName("")
         setLastName("")
         setDob("")
+
+        firstNameRef.current.value = ""
+        lastNameRef.current.value = ""
+        dobRef.current.value = ""
+
     }
 
     return(
@@ -88,6 +98,7 @@ function App(props) {
                 <Input
                     title="First Name"
                     type="text"
+                    ref={firstNameRef}
                     name="firstName"
                     autoComplete="firstNameNew"
                     className="form-control"
@@ -96,6 +107,7 @@ function App(props) {
                 <Input
                     title="Last Name"
                     type="text"
+                    ref={lastNameRef}
                     name="lastName"
                     autoComplete="lastNameNew"
                     className="form-control"
@@ -104,6 +116,7 @@ function App(props) {
                 <Input
                     title="Date of birth"
                     type="date"
+                    ref={dobRef}
                     name="dob"
                     autoComplete="dobNew"
                     className="form-control"
